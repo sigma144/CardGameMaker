@@ -1,0 +1,15 @@
+"Go Fish": 2-4 player card game
+zones: hidden initial Deck, private Hand, public Finish
+each player: draw 3 cards
+on turn:
+choose a player from players; choose a card from Hand
+say player.name + ", do you have any " + card.name + "?"
+if cards in player.Hand where cards.name == card.name:
+    move cards to Hand; extra turn
+else:
+    player: say "Go Fish!";
+    draw a newCard: card = newCard
+if cards in Hand where cards.name == card.name:
+    move cards to Finish 
+if no player in players where cards in player.Hand:
+    rank players by number of Finish, then by turn order

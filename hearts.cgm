@@ -1,0 +1,54 @@
+"Hearts": 4 player standard card game
+zones: hidden initial deck, private hand, public single Play, hidden Discard
+variables: public score = 0, public roundScore = 0
+
+before round:
+if players where player.score >= 100:
+    rank players by lowest score
+each player: roundScore = 0
+shuffle Discard into deck
+each player: draw 13 cards
+if turn number % 4 == 1: each player: choose 3 cards from hand: move cards to next player
+if turn number % 4 == 2: each player: choose 3 cards from hand: move cards to next player.next player
+if turn number % 4 == 3: each player: choose 3 cards from hand: move cards to previous player
+breakHearts = false; trumpCard = none
+if any player in players where any card in player.hand where card.name == "2 of clubs":
+    trumpPlayer = player; set turn player
+
+on turn:
+if Play: //Full trick
+{
+    each player:
+    {
+        if Play.suit == "hearts": trumpPlayer.roundScore += 1
+        if Play.name == "queen of spades": trumpPlayer.roundScore += 13
+        move Play to Discard
+    }
+    trumpCard = none
+    set turn trumpPlayer
+}
+if no hand: //End round
+{
+    each player:
+    {
+        if roundScore == 26:
+            say "Shoot the moon!"
+            each other player: score += 26
+        else: score += roundScore 
+    }
+    new round
+}
+if any card in hand where card.name == "2 of clubs":
+    move card to Play; trumpCard = card; next turn
+
+if trumpCard:
+{
+    play a card from hand where card.suit == trumpCard.suit:
+        if card.value > trumpCard.value: trumpCard = card; trumpPlayer = you
+    else: play a card: if card.suit == "hearts": breakHearts = true
+}
+else:
+{
+    play a card where breakHearts or card.suit != "hearts": trumpCard = card
+    else: play a card: trumpCard = card; if card.suit == "hearts": breakHearts = true
+}

@@ -1,0 +1,8 @@
+.vscode/
+cgm
+cgm.l
+cgm.output
+cgm.tab.c
+cgm.tab.h
+lex.yy.c
+*.pptx
