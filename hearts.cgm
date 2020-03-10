@@ -43,12 +43,12 @@ if any card in hand where card.name == "2 of clubs":
 
 if trumpCard:
 {
-    play a card from hand where card.suit == trumpCard.suit:
+    play a card from Hand where card.suit == trumpCard.suit:
         if card.value > trumpCard.value: trumpCard = card; trumpPlayer = you
-    else: play a card: if card.suit == "hearts": breakHearts = true
+    else: play a card from Hand : if card.suit == "hearts": breakHearts = true
 }
 else:
 {
-    play a card where breakHearts or card.suit != "hearts": trumpCard = card
-    else: play a card: trumpCard = card; if card.suit == "hearts": breakHearts = true
+    play a card from Hand where breakHearts or card.suit != "hearts": trumpCard = card
+    else: play a card from Hand : trumpCard = card; if card.suit == "hearts": breakHearts = true
 }

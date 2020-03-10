@@ -1,23 +1,23 @@
 "Uno!": 2-4 player card game
 zones: hidden initial Deck, top only global Play, private Hand
 each player: draw 7 cards
-move a card from Deck to Play: color = card.color; number = card.number
+move card from Deck to Play: color = card.color; number = card.number
 reverse = false
 
 function drawCard(num = 1):
-    draw #(num) cards; else: remove top card of Deck: shuffle Play into Deck; move card to Play
+    draw #(num) cards; else: remove top card of Play: shuffle Play into Deck; move card to Play
 function playCard():
-    play a card where card.color == color or card.number == number or card.number == "wild" or \
+    play card from Hand where card.color == color or card.number == number or card.number == "wild" or \
     card.number == "wild draw four" and no cards in Hand where cards.color == color:
         color = card.color; number = card.number
-function nextPlayer():
+function nextPlayer(): {
     if reverse: return previous player
     else: return next player
-
+}
 on turn:
 
 playCard(); else: drawCard(); playCard(); else: set turn nextPlayer() 
-if number of cards in hand == 1: say "Uno!"
+if 1 card in hand: say "Uno!"
 if no cards in hand: win game
 if card.number == "reverse": reverse = not reverse
 if card.number == "skip": nextPlayer(): skip turn

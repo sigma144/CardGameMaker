@@ -8,7 +8,7 @@ if player in players where player.score >= 500:
 each player: tricks = 0
 shuffle Discard into Deck
 each player: draw 13 cards
-each player: choose bid between 1 and number of cards in Hand
+each player: choose bid from 1 to size(Hand)
 breakSpades = false; //Whether spades has been played earlier in the round
 trumpCard = none; //The card that is currently trump
 trumpPlayer = first player //The player who played that card
@@ -31,11 +31,11 @@ if no Hand: {
     new round
 }
 if trumpCard: {
-    play a card where card.suit == trumpCard.suit:
+    play a card from Hand where card.suit == trumpCard.suit:
         if card.value > trumpCard.value: trumpCard = card; trumpPlayer = you
-    else: play a card: if card.suit == "spades": breakSpades = true; trumpCard = card; trumpPlayer = you
+    else: play a card from Hand: if card.suit == "spades": breakSpades = true; trumpCard = card; trumpPlayer = you
 }
 else: {
-    play a card where breakSpades or card.suit != "spades": trumpCard = card
-    else: play a card: trumpCard = card; if card.suit == "spades": breakSpades = true
+    play a card from Hand where breakSpades or card.suit != "spades": trumpCard = card
+    else: play a card from Hand: trumpCard = card; if card.suit == "spades": breakSpades = true
 }

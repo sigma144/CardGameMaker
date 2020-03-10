@@ -1,40 +1,113 @@
-#include <iostream>
-#include <stdlib.h>
-#include <map>
 #include "interp.h"
+#include "cgm.tab.h"
 
-using namespace std;
 
-void ExpressionNode::print() {
-    
+
+Val ExpressionNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void StatementNode::print() {
-    
+Val LiteralNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void VariableDeclNode::print() {
-    cout << "Variable {" << "vis: " << visibility << " "; if (global) cout << "Global "; cout << name << "} ";
+Val ListNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void ZoneDeclNode::print() {
-    cout << "Zone {" << visibility << " ";
-    if (initial) cout << "Initial "; if (global) cout << "Global "; if (single) cout << "Single "; 
-    cout << name << "} ";
+Val ReadVarNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void NumPlayersNode::print() {
-    cout << "Players {" << min << "-" << max << "} ";
+Val NameIteratorNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void HeaderNode::print() {
-    cout << "Header {"; numPlayers->print(); cout << "Game Type: " << gameType << "} ";
+Val UnaryOpNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void ProgramNode::print() {
-    cout << "Program {"; header->print(); PRINT(zones); PRINT(variables); PRINT(statements); cout << "} ";
+Val BinaryOpNode::evaluate() {
+    return { T_NONE, 0, 0 };
 }
 
-void ProgramNode::evaluate() {
-    cout << "Running Game " << header->name << endl;
+Val CommandNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val CommandOpNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val SortNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val BranchNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val AssignmentNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val GetXNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val ChoiceNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val MoveCardsNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val RollDiceNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val ParamNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val FunctionDefNode::evaluate() {
+    return { T_NONE, 0, 0 };
+};
+
+Val FunctionCallNode::evaluate() {
+    return { T_NONE, 0, 0 };
+};
+
+Val EachPlayerExecNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val PlayerExecNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val VariableDeclNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val ZoneDeclNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val NewZoneNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val XNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val HeaderNode::evaluate() {
+    return { T_NONE, 0, 0 };
+}
+
+Val ProgramNode::evaluate() {
+    cout << "Running Game " << header->name << endl; 
+    return { T_NONE, 0, 0 };
 }

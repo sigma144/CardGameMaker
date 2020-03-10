@@ -1,6 +1,5 @@
 .vscode/
 cgm
-cgm.l
 cgm.output
 cgm.tab.c
 cgm.tab.h
