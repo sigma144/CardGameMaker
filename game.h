@@ -1,8 +1,9 @@
+#pragma once
 #include <list>
 #include <string>
 #include <map>
-#include <iostream>
-#include "types.h"
+#include "interface.h"
+#include "interp.h"
 
 using namespace std;
 
@@ -22,4 +23,10 @@ struct Game {
     int turn;
     int totalTurns;
     int totalRounds;
+    Game() {
+        turn = totalTurns = totalRounds = 0;
+    }
+    void run(ProgramNode* program) {
+        program->evaluate(this);
+    }
 };

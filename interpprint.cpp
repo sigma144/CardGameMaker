@@ -1,5 +1,6 @@
 #include "interp.h"
 #include "cgm.tab.h"
+#include "game.h"
 
 using namespace std;
 

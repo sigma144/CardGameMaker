@@ -1,4 +1,4 @@
-cgm: lex.yy.c cgm.tab.c cgm.tab.h interp.h interp.cpp interpprint.cpp types.h game.h game.cpp
+cgm: lex.yy.c cgm.tab.c cgm.tab.h interp.h interp.cpp interpprint.cpp game.h game.cpp interface.h
 	g++ -g cgm.tab.c lex.yy.c interp.cpp interpprint.cpp game.cpp -lfl -o cgm
 
 cgm.tab.c cgm.tab.h: cgm.y
@@ -8,4 +8,4 @@ lex.yy.c: cgm.l cgm.tab.h
 	flex cgm.l
 
 clean:
-	rm cgm lex.yy.c
+	rm cgm lex.yy.c cgm.tab.c cgm.tab.h

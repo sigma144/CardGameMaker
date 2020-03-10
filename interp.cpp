@@ -1,113 +1,112 @@
 #include "interp.h"
 #include "cgm.tab.h"
+#include "game.h"
 
-
-
-Val ExpressionNode::evaluate() {
+Val ExpressionNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val LiteralNode::evaluate() {
+Val LiteralNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ListNode::evaluate() {
+Val ListNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ReadVarNode::evaluate() {
+Val ReadVarNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val NameIteratorNode::evaluate() {
+Val NameIteratorNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val UnaryOpNode::evaluate() {
+Val UnaryOpNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val BinaryOpNode::evaluate() {
+Val BinaryOpNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val CommandNode::evaluate() {
+Val CommandNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val CommandOpNode::evaluate() {
+Val CommandOpNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val SortNode::evaluate() {
+Val SortNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val BranchNode::evaluate() {
+Val BranchNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val AssignmentNode::evaluate() {
+Val AssignmentNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val GetXNode::evaluate() {
+Val GetXNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ChoiceNode::evaluate() {
+Val ChoiceNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val MoveCardsNode::evaluate() {
+Val MoveCardsNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val RollDiceNode::evaluate() {
+Val RollDiceNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ParamNode::evaluate() {
+Val ParamNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val FunctionDefNode::evaluate() {
+Val FunctionDefNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 };
 
-Val FunctionCallNode::evaluate() {
+Val FunctionCallNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 };
 
-Val EachPlayerExecNode::evaluate() {
+Val EachPlayerExecNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val PlayerExecNode::evaluate() {
+Val PlayerExecNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val VariableDeclNode::evaluate() {
+Val VariableDeclNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ZoneDeclNode::evaluate() {
+Val ZoneDeclNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val NewZoneNode::evaluate() {
+Val NewZoneNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val XNode::evaluate() {
+Val XNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val HeaderNode::evaluate() {
+Val HeaderNode::evaluate(Game* game) {
     return { T_NONE, 0, 0 };
 }
 
-Val ProgramNode::evaluate() {
+Val ProgramNode::evaluate(Game* game) {
     cout << "Running Game " << header->name << endl; 
     return { T_NONE, 0, 0 };
 }

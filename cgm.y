@@ -3,6 +3,7 @@
 	#include <iostream>
 	#include <list>
 	#include "interp.h"
+	#include "game.h"
 	using namespace std;
 
 	// stuff from flex that bison needs to know about:
@@ -361,7 +362,8 @@ int main(int argc, char** argv) {
 
 	root->print();
 	cout << endl << "PARSE SUCCESSFUL!" << endl << endl;
-	root->evaluate();
+	Game* game = new Game();
+	game->run(root);
 }
 
 void yyerror(const char *s) {
