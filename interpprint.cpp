@@ -39,10 +39,10 @@ void ExpressionNode::print() {
 }
 
 void LiteralNode::print() {
-    if (type == T_NONE) cout << "none";
-    else if (type == T_NUMBER) cout << number;
-    else if (type == T_STRING) cout << str;
-    else if (type == T_BOOLEAN) cout << (boolean ? "true" : "false");
+    if (val.type == T_NONE) cout << "none";
+    else if (val.type == T_NUMBER) cout << val.val.number;
+    else if (val.type == T_STRING) cout << val.val.str;
+    else if (val.type == T_BOOLEAN) cout << (val.val.number ? "true" : "false");
     else cout << "unknown";
 }
 

@@ -4,33 +4,47 @@
 #include <cstring>
 #include <map>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
 struct Game;
-enum Type { T_NONE, T_NUMBER, T_STRING, T_BOOLEAN, T_CARD, T_PLAYER };
+enum Type { T_NONE, T_NUMBER, T_STRING, T_BOOLEAN, T_CARD, T_PLAYER, T_ZONE, T_LIST = 0x100,
+            T_LIST_NUMBER = T_LIST | T_NUMBER, T_LIST_STRING = T_LIST | T_STRING,
+            T_LIST_BOOLEAN = T_LIST | T_BOOLEAN, T_LIST_CARD = T_LIST | T_CARD,
+            T_LIST_PLAYER = T_LIST | T_PLAYER, T_LIST_ZONE = T_LIST | T_ZONE };
+
+union ValData {
+    void* ptr;
+    int number;
+    char* str;
+};
 
 struct Val {
     Type type;
-    int list;
-    void* val;
+    ValData val;
 };
 
 struct Node {
+    int cmd;
+    Node() { cmd = 0; }
     virtual void print() = 0;
     virtual Val evaluate(Game* game) = 0;
     static map<int, std::string> tokNames;
-    void printTok(int tok) {
-        if (Node::tokNames.count(tok)) cout << tokNames[tok];
-        else cout << char(tok);
-    }
+    void checkType(string var, Val val, Type type);
+    void printTok(int tok);
+    void error(string message);
+    void typeError(string var, Type expected, Type received);
+private:
+    string getTokString(int tok);
+    string getErrorHeader();
+    string getTypeString(Type type);
 };
 
 struct ExpressionNode : public Node {
     ExpressionNode() { this->cmd = 0; }
     ExpressionNode(int cmd) { this->cmd = cmd; }
     void print(); Val evaluate(Game* game);
-    int cmd; 
 };
 
 struct XNode : public ExpressionNode {
@@ -45,12 +59,18 @@ struct XNode : public ExpressionNode {
 };
 
 struct LiteralNode : public ExpressionNode {
-    LiteralNode(int number) { this->type = T_NUMBER; this->number = number; }
-    LiteralNode(char* str) { this->type = T_STRING; this->str = str; }
-    LiteralNode(bool boolean) { this->type = T_BOOLEAN; this->boolean = boolean; }
-    LiteralNode() { this->type = T_NONE; }
+    LiteralNode(int number) {
+        ValData vdata; vdata.number = number;
+        val = { T_NUMBER, vdata };
+    }
+    LiteralNode(char* str) { val = { T_STRING, str }; }
+    LiteralNode(bool boolean) {
+        ValData vdata; vdata.number = boolean;
+        val = { T_BOOLEAN, vdata };
+    }
+    LiteralNode() { val = { T_NONE, 0 }; }
     void print(); Val evaluate(Game* game);
-    Type type; int number; char* str; bool boolean; 
+    Val val;
 };
 
 struct ListNode : public ExpressionNode {
@@ -88,7 +108,6 @@ struct CommandNode : public Node {
     CommandNode() { }
     CommandNode(int cmd) { this->cmd = cmd; }
     void print(); Val evaluate(Game* game);
-    int cmd;
 };
 
 struct CommandOpNode : public CommandNode {
@@ -110,7 +129,7 @@ struct BranchNode : public CommandNode {
     BranchNode(int cmd, XNode* x, ExpressionNode* condition, list<CommandNode*>* then) : CommandNode(cmd)
         { this->cmd = cmd; this->x = x; this->condition = condition; this->then = then; }
     void print(); Val evaluate(Game* game);
-    int cmd; XNode* x; ExpressionNode* condition; list<CommandNode*>* then;
+    XNode* x; ExpressionNode* condition; list<CommandNode*>* then;
 };
 
 struct AssignmentNode : public CommandNode {

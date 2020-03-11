@@ -4,6 +4,7 @@
 	#include <list>
 	#include "interp.h"
 	#include "game.h"
+	#include "consoleint.h"
 	using namespace std;
 
 	// stuff from flex that bison needs to know about:
@@ -17,7 +18,6 @@
 %}
 
 %union {
-	bool boolean;
 	int number;
 	char* str;
 	Node* node; ExpressionNode* expnode; CommandNode* cmdnode; VariableDeclNode* vdnode;
@@ -73,8 +73,7 @@
 %left '.'
 %left '(' ')'
 /* Non=terminals */
-%type<boolean> 	_bottom_of _optional _descending _random _single
-%type<number> game_type visibility
+%type<number> game_type visibility _bottom_of _optional _descending _random _single
 %type<prognode> program
 %type<headnode> header
 %type<xnode> num_players indices x _x range
@@ -362,7 +361,7 @@ int main(int argc, char** argv) {
 
 	root->print();
 	cout << endl << "PARSE SUCCESSFUL!" << endl << endl;
-	Game* game = new Game();
+	Game* game = new Game(new ConsoleInterface());
 	game->run(root);
 }
 

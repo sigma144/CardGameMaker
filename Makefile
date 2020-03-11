@@ -1,5 +1,5 @@
-cgm: lex.yy.c cgm.tab.c cgm.tab.h interp.h interp.cpp interpprint.cpp game.h game.cpp interface.h
-	g++ -g cgm.tab.c lex.yy.c interp.cpp interpprint.cpp game.cpp -lfl -o cgm
+cgm: lex.yy.c cgm.tab.c cgm.tab.h interp.h game.h interface.h consoleint.h *.cpp
+	g++ -g cgm.tab.c lex.yy.c *.cpp -lfl -o cgm
 
 cgm.tab.c cgm.tab.h: cgm.y
 	bison -v -d cgm.y
